@@ -31,7 +31,7 @@ class _DetailsPageState extends State<DetailsPage> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(15, 40, 15, 15),
+            padding: EdgeInsets.fromLTRB(15, 60, 15, 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -117,37 +117,83 @@ class _DetailsPageState extends State<DetailsPage> {
                                 colorFilter: ColorFilter.mode(
                                     Colors.black.withOpacity(0.6),
                                     BlendMode.darken))),
-                        child: Row(
-                          children: <Widget>[
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  'Kyoto Tour',
-                                  style: GoogleFonts.montserrat(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      textStyle:
-                                          TextStyle(color: Colors.white)),
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 25),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: <Widget>[
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    'Kyoto Tour',
+                                    style: GoogleFonts.montserrat(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        textStyle:
+                                            TextStyle(color: Colors.white)),
+                                  ),
+                                  Text(
+                                    'Three days tour around Kyoto',
+                                    style: GoogleFonts.montserrat(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.normal,
+                                        textStyle:
+                                            TextStyle(color: Colors.white)),
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                child: Center(
+                                  child: Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: Color(0xFFFD4F99),
+                                  ),
                                 ),
-                                Text(
-                                  'Three days tour around Kyoto',
-                                  style: GoogleFonts.montserrat(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.normal,
-                                      textStyle:
-                                          TextStyle(color: Colors.white)),
-                                ),
-                                SizedBox(
-                                  height: 40,
-                                )
-                              ],
-                            )
-                          ],
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.white),
+                              ),
+                            ],
+                          ),
                         ),
-                      )
+                      ),
                     ],
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width - 30,
+                    child: Text(
+                      'Weekly Highlights',
+                      style: GoogleFonts.montserrat(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          textStyle: TextStyle(color: Colors.white)),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    height: 200,
+                    width: MediaQuery.of(context).size.width - 30,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: <Widget>[
+                        buildListItem('images/japan.jpg', 'Takashi castle',
+                            '\$200 - \$400'),
+                        buildListItem('images/kyoto.jpg', 'Heaven\'s gate',
+                            '\$50 - \$150'),
+                        buildListItem(
+                            'images/canada.jpg', 'Miay gate', '\$300 - \$350')
+                      ],
+                    ),
                   )
                 ],
               ),
@@ -156,5 +202,55 @@ class _DetailsPageState extends State<DetailsPage> {
         ],
       ),
     );
+  }
+
+  buildListItem(String imgPath, String placeName, String price) {
+    return Padding(
+        padding: EdgeInsets.all(10.0),
+        child: Stack(children: [
+          Container(
+              height: 175.0,
+              width: 150.0,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(7.0),
+                  image: DecorationImage(
+                      image: AssetImage(imgPath),
+                      fit: BoxFit.cover,
+                      colorFilter: ColorFilter.mode(
+                          Colors.black.withOpacity(0.6), BlendMode.darken)))),
+          Positioned(
+              top: 15.0,
+              right: 15.0,
+              child: Container(
+                  height: 25.0,
+                  width: 25.0,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.0),
+                      color: Colors.white),
+                  child: Center(
+                      child: Icon(
+                    Icons.bookmark_border,
+                    color: Color(0xFFFD4F99),
+                    size: 14.0,
+                  )))),
+          Positioned(
+              top: 125.0,
+              left: 15.0,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(placeName,
+                      style: GoogleFonts.montserrat(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15.0,
+                          textStyle: TextStyle(color: Colors.white))),
+                  Text(price,
+                      style: GoogleFonts.montserrat(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14.0,
+                          textStyle: TextStyle(color: Colors.white)))
+                ],
+              ))
+        ]));
   }
 }
