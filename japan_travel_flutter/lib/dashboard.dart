@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:japan_travel_flutter/detailsPage.dart';
 
 class DashBoardPage extends StatefulWidget {
   @override
@@ -12,7 +13,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
     return Column(
       children: <Widget>[
         SizedBox(
-          height: 20,
+          height: 40,
         ),
         Padding(
           padding: const EdgeInsets.all(15.0),
@@ -57,11 +58,13 @@ class _DashBoardPageState extends State<DashBoardPage> {
         ),
         SizedBox(height: 10),
         Container(
-          height: MediaQuery.of(context).size.height - 156,
+          height: MediaQuery.of(context).size.height - 176,
           child: ListView(
             children: <Widget>[
               buildListItem('images/japan.jpg', 'Japan',
-                  'Explore the land of the rising sun')
+                  'Explore the land of the rising sun'),
+              buildListItem('images/canada.jpg', 'Canada',
+                  'Explore the vast forestes of Canada'),
             ],
           ),
         )
@@ -114,7 +117,13 @@ class _DashBoardPageState extends State<DashBoardPage> {
                     height: 50,
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => DetailsPage(
+                                imagePath: imgPath,
+                                title: country,
+                              )));
+                    },
                     child: Container(
                       child: Center(
                         child: Text(
